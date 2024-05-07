@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Preview</title>
+    <link href="/style.css" rel="stylesheet">
+    <!--Trash icon-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f4f4f4;
+        }
+
+        .preview-container {
+            height: 100%;
+            width: 92%;
+            display: block;
+        }
+
+        .book-details {
+            height: 100%;
+            width: 100%;
+            margin: 50px 50px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 1000px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+
+        .mainbook-container {
+            display: flex;
+        }
+
+        .title-container {
+            display: block;
+        }
+
+        .cover-img {
+            width: 430px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-right: 50px;
+        }
+
+        .title {
+            font-size: 35px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .genres-container {
+            font-size: 15px;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        .genres-container h2 {
+            margin-bottom: 15px;
+        }
+
+        .genres-container a {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            text-decoration: none;
+            padding: 15px;
+            color: #333;
+            margin-right: 10px;
+        }
+
+        .tags-container {
+            font-size: 15px;
+            color: #555;
+            margin-top: 50px;
+        }
+
+        .tags-container h2 {
+            margin-bottom: 15px;
+        }
+
+        .tags-container a {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            text-decoration: none;
+            padding: 15px;
+            color: #333;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .button-container {
+            display: grid;
+            margin-left: -10px;
+            margin-top: 10px;
+        }
+
+        .button-container button {
+            margin: 10px;
+            width: 430px;
+            height: 50px;
+            background: #333;
+            color: #dbdbdb;
+            border-radius: 10px;
+            font-size: 20px;
+            align-items: center;
+        }
+
+        .button-container button:hover {
+            cursor: pointer;
+            background: var(--green);
+        }
+
+
+
+        .chapters-text-container,
+        .descript-text-container {
+            width: 49.3%;
+            height: 50px;
+            cursor: pointer;
+            background: #333;
+            color: #dbdbdb;
+            border: none;
+            font-size: 20px;
+            border-radius: 5px;
+            padding: 8px 15px;
+            margin-top: 20px;
+        }
+
+
+        .chapters-text-container {
+            margin-left: 10px;
+        }
+
+        .chapters-text-container:hover {
+            cursor: pointer;
+            background: var(--green);
+        }
+
+        .delete-icon {
+            display: block;
+            font-size: 20px;
+            margin: -40px 1220px;
+            padding: 10px 20px;
+            color: rgb(243, 11, 11);
+        }
+
+        .descript-text-container:hover {
+            cursor: pointer;
+            background: var(--green);
+        }
+
+        .chapter-list-item {
+            height: 50px;
+            width: 98%;
+            font-size: 22px;
+            padding: 14px 10px;
+            justify-items: center;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .descript-container {
+            width: auto;
+            height: 100%;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #d6d6d6;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .description {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .chapter {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .no-data {
+            margin: 100px;
+            display: block;
+            text-align: center;
+            font-size: 25px;
+            background-color: #d6d6d6;
+            padding: 20px;
+            border-radius: 10px
+        }
+
+        /* CSS for review section */
+
+        .review-overall {
+            height: 100%;
+            width: 100%;
+            margin: 50px 50px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 2000px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: block;
+        }
+
+        .review-overall h2 {
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        #reviewsContainer {
+            width: 100%;
+            margin-top: 50px;
+            font-size: 30px;
+            background-color: #d6d6d6;
+            padding: 20px;
+            max-height: 900px;
+            overflow-y: auto;
+        }
+
+        .review-item {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        .review-item h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .review-item p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        #writeReviewForm {
+            margin-top: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: #d6d6d6;
+        }
+
+        #writeReviewForm h3 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        #writeReviewForm label {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        #writeReviewForm input[type="text"] {
+            width: 100%;
+            height: 100%;
+            background: rgb(255, 255, 255);
+            border: none;
+            outline: none;
+            border: 2px solid rgb(0, 0, 0);
+            border-radius: 40px;
+            font-size: 20px;
+            color: black;
+            padding: 20px 45px 20px 20px;
+        }
+
+        #writeReviewForm textarea {
+            width: 100%;
+            height: 400px;
+            background: rgb(255, 255, 255);
+            border: none;
+            outline: none;
+            border: 2px solid rgb(0, 0, 0);
+            border-radius: 40px;
+            font-size: 18px;
+            color: black;
+            padding: 20px 45px 20px 20px;
+        }
+
+        #writeReviewForm button[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            margin-top: 50px;
+            margin-left: 86.3%;
+            border-radius: 10px;
+            padding: 15px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #writeReviewForm button[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+
+        .random-books-container {
+            width: 99.3%;
+            margin: 4%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-gap: 20px;
+        }
+
+        .book-container {
+            cursor: pointer;
+        }
+
+        .book-image {
+            width: 95%;
+            height: 70%;
+            border-radius: 20px;
+        }
+
+        .book-title {
+            margin-top: 10px;
+            font-size: 18px;
+            text-align: center;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------header starts------------------->
+    <header id="header" class="header">
+        <div class="header-1">
+            <a href="/index.html" class="logo"><img src="/assets/book-logo.jpeg"></a>
+            <div class="icons">
+                <div id="user-login-btn" class="user-login-btn" onclick="toggleIcon()">
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+                <div id="subMenu" class="sub-menu-wrap">
+                    <div class="sub-icon" id="sub-icon">
+                        <div class="user-info" id="user-info">
+                            <img id="user-image" src="/assets/person-circle.svg" alt="">
+                            <span id="user-name">User</span>
+                        </div>
+                        <hr>
+                        <a href="/html/profile.html" class="sub-icon-link" id="profile-link">
+                            <i class='bx bxs-user-circle'></i>
+                            <p>Profile</p>
+                        </a>
+                        <a href="/html/usersettings.html" class="sub-icon-link" id="settings-link">
+                            <i class='bx bxs-cog'></i>
+                            <p>Settings</p>
+                        </a>
+                        <a href="/html/contactus.html" class="sub-icon-link" id="helps-services-link">
+                            <i class="bi bi-question-circle-fill"></i>
+                            <p>Helps & Services</p>
+                        </a>
+                        <a href="/html/Login.html" class="sub-icon-link" id="logout-link" onclick="logout()">
+                            <i class='bx bx-log-out'></i>
+                            <p id="logout-text">Logout</p>
+                        </a>
+                        <a href="/html/Login.html" class="sub-icon-link" id="login-link">
+                            <i class='bx bx-log-in'></i>
+                            <p>Login</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <script src="/js/navbar.js" type="module"></script>
+        </div>
+        <div class="header-2">
+            <nav id="navbar" class="navbar">
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class="menu-icon" for="menu-btn">
+                    <span class="nav-icon"></span>
+                </label>
+                <div class="menu"></div>
+                <script type="module">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const menu = document.querySelector('.menu');
+
+                        const menuItems = [
+                            { text: 'Home', href: '/index.html', onclick: 'showMenu(0)' },
+                            { text: 'Genres', href: '/html/genres.html', onclick: 'showMenu(1)' },
+                            { text: 'Library', href: '/html/library.html', onclick: 'showMenu(3)' },
+                            { text: 'User Settings', href: '/html/usersettings.html', onclick: 'showMenu(4)' },
+                            { text: 'About Us', href: '/html/aboutus.html', onclick: 'showMenu(5)' }
+                        ];
+
+                        menuItems.forEach(item => {
+                            const link = document.createElement('a');
+                            link.textContent = item.text;
+                            link.href = item.href;
+                            link.setAttribute('onclick', item.onclick);
+                            link.classList.add('nav-link');
+                            menu.appendChild(link);
+                        });
+                    });
+                </script>
+            </nav>
+        </div>
+        <script>
+            let subIcon = document.getElementById("subMenu");
+            function toggleIcon() {
+                subIcon.classList.toggle("open-icon");
+            }
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const menuLinks = document.querySelectorAll(".menu a");
+
+                menuLinks.forEach(function (link, index) {
+                    link.addEventListener("click", function () {
+                        // Remove 'active' class from all links
+                        menuLinks.forEach(function (menuLink) {
+                            menuLink.classList.remove("active");
+                        });
+                        // Add 'active' class to the clicked link
+                        link.classList.add("active")
+
+                        // Show the selected link
+                        showMenu(index);
+                    });
+                });
+            });
+        </script>
+    </header>
+    <!---------------------Header close---------------------->
+    <div class="preview-container">
+        <div class="book-details" id="bookDetailsContainer">
+            <!-- Book details will be dynamically added here -->
+        </div>
+
+        <div id="review-overall" class="review-overall">
+            <h2>Leave a Review</h2>
+            <form id="writeReviewForm">
+                <h3>Leave a Review</h3>
+                <label for="reviewTitle">Review Title:</label>
+                <input type="text" id="reviewTitle" name="reviewTitle">
+
+                <label for="reviewContent">Review Content:</label>
+                <textarea id="reviewContent" name="reviewContent"></textarea>
+
+                <button type="submit">Submit Review</button>
+            </form>
+            <div id="reviewsContainer"></div>
+        </div>
+        <div id="randomBooksContainer" class="random-books-container">
+            <!-- Random books will be displayed here -->
+        </div>
+    </div>
+    <script src="/js/authorpreview.js" type="module"></script>
+    <section class="footer">
+        
+        <div class="footer-container">
+            
+            <div class="row">
+
+                <ul class="footer-links">
+                    <li>
+                        <a href="/html/alltags.html"></i>All Tags</a>
+                    </li>
+                    <li>
+                        <a href="/html/profile.html"></i>Profile Info</a>
+                    </li>
+                    <li>
+                        <a href="/html/t&c.html"></i>Terms and Condition</a>
+                    </li>
+                    <li style="border-right: none">
+                        <a href="/html/contactus.html"></i>Contact Us</a>
+                    </li>
+                </ul>
+                <div class="credit"> <span> Bookish </span>copyright ©2023 all rights reserved! </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

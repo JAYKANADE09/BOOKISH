@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details</title>
+    <link href="/style.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 85%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .booktitle {
+            height: 40px;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10%;
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-bottom: 50px;
+            text-align: center;
+
+        }
+
+        .chaptercontentdisplay {
+            font-size: 20px;
+            margin-bottom: 50px;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        button {
+            margin-bottom: 50px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .blur {
+            filter: blur(5px);
+            margin-top: 10%;
+        }
+
+
+        .float-left {
+            padding: 15px 20px;
+            margin-right: 390px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .float-center {
+            padding: 15px 20px;
+            margin-right: 390px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .float-right {
+            padding: 15px 20px;
+            margin-right: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+            transform: scale(1.1);
+        }
+
+        /* Dropdown styles */
+        .menu-chapters {
+            height: 40px;
+            width: auto;
+            background-color: #515050;
+            backdrop-filter: blur(10px);
+            text-align: end;
+        }
+
+        .menu-chapters a {
+            padding: 9.9px;
+            display: inline-flex;
+            text-decoration: none;
+            font-size: 20px;
+            color: rgb(254, 254, 255);
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+        .menu-chapters a:hover {
+            background: #adadad;
+            border-radius: 2px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            padding: 12px 16px;
+            z-index: 1;
+            border-radius: 5px;
+            margin-top: 40px;
+            margin-left: -460px;
+        }
+
+        .dropdown-content h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .dropdown-content div {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-content label {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        .dropdown-content button {
+            margin-right: 10px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #000000;
+            color: #fff;
+        }
+
+        .dropdown-content input[type="color"] {
+            margin-right: 10px;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .dropdown-content button:hover {
+            background-color: var(--green);
+        }
+
+
+        .dropdown-content input[type="color"] {
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+            border: none;
+            width: 30px;
+            height: 30px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown input[type="text"] {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        .dropdown button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .dropdown button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .dropdown-content a {
+            color: #000;
+        }
+
+        .dropdown-content a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------header starts------------------->
+    <header id="header" class="header">
+        <div class="header-1">
+            <a href="/index.html" class="logo"><img src="/assets/book-logo.jpeg"></a>
+            <div class="icons">
+                <div id="user-login-btn" class="user-login-btn" onclick="toggleIcon()">
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+                <div id="subMenu" class="sub-menu-wrap">
+                    <div class="sub-icon" id="sub-icon">
+                        <div class="user-info" id="user-info">
+                            <img id="user-image" src="/assets/person-circle.svg" alt="">
+                            <span id="user-name">User</span>
+                        </div>
+                        <hr>
+                        <a href="/html/profile.html" class="sub-icon-link" id="profile-link">
+                            <i class='bx bxs-user-circle'></i>
+                            <p>Profile</p>
+                        </a>
+                        <a href="/html/usersettings.html" class="sub-icon-link" id="settings-link">
+                            <i class='bx bxs-cog'></i>
+                            <p>Settings</p>
+                        </a>
+                        <a href="/html/contactus.html" class="sub-icon-link" id="helps-services-link">
+                            <i class="bi bi-question-circle-fill"></i>
+                            <p>Helps & Services</p>
+                        </a>
+                        <a href="/html/Login.html" class="sub-icon-link" id="logout-link" onclick="logout()">
+                            <i class='bx bx-log-out'></i>
+                            <p id="logout-text">Logout</p>
+                        </a>
+                        <a href="/html/Login.html" class="sub-icon-link" id="login-link">
+                            <i class='bx bx-log-in'></i>
+                            <p>Login</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <script src="/js/navbar.js" type="module"></script>
+        </div>
+        <div class="header-2">
+            <nav id="navbar" class="navbar">
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class="menu-icon" for="menu-btn">
+                    <span class="nav-icon"></span>
+                </label>
+                <div class="menu"></div>
+                <script type="module">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const menu = document.querySelector('.menu');
+
+                        const menuItems = [
+                            { text: 'Home', href: '/index.html', onclick: 'showMenu(0)' },
+                            { text: 'Genres', href: '/html/genres.html', onclick: 'showMenu(1)' },
+                            { text: 'Library', href: '/html/library.html', onclick: 'showMenu(3)' },
+                            { text: 'User Settings', href: '/html/usersettings.html', onclick: 'showMenu(4)' },
+                            { text: 'About Us', href: '/html/aboutus.html', onclick: 'showMenu(5)' }
+                        ];
+
+                        menuItems.forEach(item => {
+                            const link = document.createElement('a');
+                            link.textContent = item.text;
+                            link.href = item.href;
+                            link.setAttribute('onclick', item.onclick);
+                            link.classList.add('nav-link');
+                            menu.appendChild(link);
+                        });
+                    });
+                </script>
+            </nav>
+        </div>
+        <script>
+            let subIcon = document.getElementById("subMenu");
+            function toggleIcon() {
+                subIcon.classList.toggle("open-icon");
+            }
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const menuLinks = document.querySelectorAll(".menu a");
+
+                menuLinks.forEach(function (link, index) {
+                    link.addEventListener("click", function () {
+                        // Remove 'active' class from all links
+                        menuLinks.forEach(function (menuLink) {
+                            menuLink.classList.remove("active");
+                        });
+                        // Add 'active' class to the clicked link
+                        link.classList.add("active")
+
+                        // Show the selected link
+                        showMenu(index);
+                    });
+                });
+            });
+        </script>
+    </header>
+    <!---------------------Header close---------------------->
+    <div class="menu-chapters">
+
+        <a id="bookmarkchpbtn" href="#"><i class="bx bxs-bookmark"></i></a>
+
+        <div class="dropdown">
+            <a href="#" onclick="toggleDropdown('chaptersDropdown', 1)"><i class='bx bx-menu'></i></a>
+            <div class="dropdown-content" id="chaptersDropdown"
+                style="width: 500px; height: auto; text-align: left; max-height: 1000px; overflow-y: auto;">
+                <div id="chapterContent"></div>
+                <!-- Contents of the chapters dropdown -->
+            </div>
+        </div>
+
+    </div>
+    <div id="bookDetailsContainer" class="container">
+        <!-- Book details will be dynamically added here -->
+    </div>
+    <script src="/js/displaychapters.js" type="module"></script>
+    <script type="module">
+        // Function to toggle dropdown visibility
+        function toggleDropdown(dropdownId, index) {
+            var dropdownContent = document.getElementById(dropdownId);
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+
+            // Hide other dropdowns
+            const dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach((dropdown, i) => {
+                if (i !== index) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        }
+
+        function changeFontStyle(fontStyle) {
+            const chapterContent = document.getElementById("chapterContent");
+            chapterContent.style.fontFamily = fontStyle;
+        }
+
+    </script>
+     <section class="footer">
+        
+        <div class="footer-container">
+            
+            <div class="row">
+
+                <ul class="footer-links">
+                    <li>
+                        <a href="/html/alltags.html"></i>All Tags</a>
+                    </li>
+                    <li>
+                        <a href="/html/profile.html"></i>Profile Info</a>
+                    </li>
+                    <li>
+                        <a href="/html/t&c.html"></i>Terms and Condition</a>
+                    </li>
+                    <li style="border-right: none">
+                        <a href="/html/contactus.html"></i>Contact Us</a>
+                    </li>
+                </ul>
+                <div class="credit"> <span> Bookish </span>copyright ©2023 all rights reserved! </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

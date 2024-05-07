@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Books</title>
+
+  <link href="/style.css" rel="stylesheet">
+
+  <style>
+    .displaybookcontainer {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 25px;
+      ;
+    }
+
+    .container-card {
+      width: 92%;
+      margin-left: 4%;
+      margin-top: 1%;
+      margin-bottom: 1%;
+      height: 10%;
+      background: #cfcfcf;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    .book {
+      display: flex;
+      margin-top: 0px;
+    }
+
+    .cover-img {
+      width: 15%;
+      height: 250px;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: pointer;
+
+    }
+
+    .info-container {
+      flex: 1;
+      padding-left: 10px;
+      height: 238px;
+      width: 700px;
+      border-right: 1px solid #000;
+      margin-right: 10px;
+    }
+
+    .title {
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .description {
+      margin-top: 10px;
+      margin-right: 20px;
+      font-size: 19px;
+      color: #000;
+      height: 71%;
+      overflow: hidden;
+      position: relative;
+      white-space: pre-wrap;
+    }
+
+    .delete-icon {
+      display: block;
+      font-size: 20px;
+      margin: 5px 190px;
+      padding: 10px 20px;
+      color: rgb(243, 11, 11);
+    }
+
+    .genre-tags-container {
+      padding-left: 10px;
+      width: 250px;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      white-space: pre-wrap;
+    }
+
+    .genres {
+      margin-top: 10px;
+      margin-bottom: 25px;
+      font-size: 20px;
+      color: #000;
+    }
+
+    .tags {
+      font-size: 20px;
+      color: #000;
+    }
+
+
+
+    /* Search bar */
+    .search-bar {
+      display: inline-flex;
+      position: relative;
+      margin-top: 1%;
+      margin-left: 4%;
+      width: 100%;
+      height: 50px;
+    }
+
+    .search-bar input[type="text"] {
+      height: 100%;
+      width: 75%;
+      padding: 8px 12px;
+      font-size: 20px;
+      text-transform: none;
+      color: black;
+      border: 1px solid #000000;
+      border-radius: 4px;
+    }
+
+    .search-bar button {
+      height: 100%;
+      width: 8%;
+      background-color: #000000;
+      margin-left: 0.1%;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      /* Rounded border on the right side */
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 800;
+      transition: background-color 0.3s;
+    }
+
+    .search-bar button:hover {
+      background-color: var(--green);
+      color: #000;
+    }
+
+    .genre-container {
+      position: relative;
+      margin-left: 2%;
+    }
+
+    #genreDropdown {
+      height: 50px;
+      width: 100%;
+      padding: 0 20px 0 20px;
+      background-color: #000000;
+      color: #ffffff;
+      font-size: 20px;
+      border-radius: 4px;
+      font-weight: 800;
+    }
+
+    #genreDropdown:hover {
+      background-color: var(--green);
+      color: #000;
+    }
+
+    .genre-menu-container {
+      height: max-content;
+      width: 200%;
+      position: absolute;
+      z-index: 1000;
+      display: none;
+      min-width: 100%;
+      padding: 15px 13px;
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 2.5px;
+      margin-left: -100px;
+    }
+
+    .genre-menu-container.show {
+      display: block;
+    }
+
+    .genre-item {
+      display: block;
+      width: 100%;
+      padding: 5px 10px;
+      clear: both;
+      font-weight: 800;
+      font-size: 20px;
+      color: #212529;
+      text-align: inherit;
+      white-space: nowrap;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .genre-item:hover {
+      background-color: var(--green);
+      color: #000;
+    }
+
+
+    .genre-container.expanded .genre-menu-container {
+      display: block;
+    }
+
+    .genre-container.expanded #search-button {
+      display: block;
+    }
+
+    /* Checkbox styles */
+    .genre-item input[type="checkbox"] {
+      display: none;
+    }
+
+    .genre-item input[type="checkbox"]:checked+label {
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <!-------------header starts------------------->
+  <header id="header" class="header">
+    <div class="header-1">
+      <a href="/index.html" class="logo"><img src="/assets/book-logo.jpeg"></a>
+      <div class="icons">
+        <div id="user-login-btn" class="user-login-btn" onclick="toggleIcon()">
+          <i class='bx bxs-user-circle'></i>
+        </div>
+        <div id="subMenu" class="sub-menu-wrap">
+          <div class="sub-icon" id="sub-icon">
+            <div class="user-info" id="user-info">
+              <img id="user-image" src="/assets/person-circle.svg" alt="">
+              <span id="user-name">User</span>
+            </div>
+            <hr>
+            <a href="/html/profile.html" class="sub-icon-link" id="profile-link">
+              <i class='bx bxs-user-circle'></i>
+              <p>Profile</p>
+            </a>
+            <a href="/html/usersettings.html" class="sub-icon-link" id="settings-link">
+              <i class='bx bxs-cog'></i>
+              <p>Settings</p>
+            </a>
+            <a href="/html/contactus.html" class="sub-icon-link" id="helps-services-link">
+              <i class="bi bi-question-circle-fill"></i>
+              <p>Helps & Services</p>
+            </a>
+            <a href="/html/Login.html" class="sub-icon-link" id="logout-link" onclick="logout()">
+              <i class='bx bx-log-out'></i>
+              <p id="logout-text">Logout</p>
+            </a>
+            <a href="/html/Login.html" class="sub-icon-link" id="login-link">
+              <i class='bx bx-log-in'></i>
+              <p>Login</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <script src="/js/navbar.js" type="module"></script>
+    </div>
+    <div class="header-2">
+      <nav id="navbar" class="navbar">
+        <input class="menu-btn" type="checkbox" id="menu-btn" />
+        <label class="menu-icon" for="menu-btn">
+          <span class="nav-icon"></span>
+        </label>
+        <div class="menu"></div>
+        <script type="module">
+          document.addEventListener("DOMContentLoaded", function () {
+            const menu = document.querySelector('.menu');
+
+            const menuItems = [
+              { text: 'Home', href: '/index.html', onclick: 'showMenu(0)' },
+              { text: 'Genres', href: '/html/genres.html', onclick: 'showMenu(1)' },
+              { text: 'Library', href: '/html/library.html', onclick: 'showMenu(3)' },
+              { text: 'User Settings', href: '/html/usersettings.html', onclick: 'showMenu(4)' },
+              { text: 'About Us', href: '/html/aboutus.html', onclick: 'showMenu(5)' }
+            ];
+
+            menuItems.forEach(item => {
+              const link = document.createElement('a');
+              link.textContent = item.text;
+              link.href = item.href;
+              link.setAttribute('onclick', item.onclick);
+              link.classList.add('nav-link');
+              menu.appendChild(link);
+            });
+          });
+        </script>
+      </nav>
+    </div>
+    <script>
+      let subIcon = document.getElementById("subMenu");
+      function toggleIcon() {
+        subIcon.classList.toggle("open-icon");
+      }
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuLinks = document.querySelectorAll(".menu a");
+
+        menuLinks.forEach(function (link, index) {
+          link.addEventListener("click", function () {
+            // Remove 'active' class from all links
+            menuLinks.forEach(function (menuLink) {
+              menuLink.classList.remove("active");
+            });
+            // Add 'active' class to the clicked link
+            link.classList.add("active")
+
+            // Show the selected link
+            showMenu(index);
+          });
+        });
+      });
+    </script>
+  </header>
+  <!---------------------Header close---------------------->
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Search Books...">
+    <button id="searchButton">Search</button>
+
+
+    <!-- Modified genre container -->
+    <div class="genre-container" id="genreContainer">
+      <div class="dropdown">
+        <button type="button" id="genreDropdown" onclick="toggleGenreContainer()">Genres</button>
+        <div class="genre-menu-container" id="genreMenuContainer">
+          <div class="genre-menu">
+            <a class="genre-item">
+              <input type="checkbox" id="allGenre" checked>
+              <label for="allGenre">All</label>
+            </a>
+            <a class="genre-item">
+              <input type="checkbox" id="actionGenre">
+              <label for="actionGenre">Action</label>
+            </a>
+            <a class="genre-item">
+              <input type="checkbox" id="adventureGenre">
+              <label for="adventureGenre">Adventure</label>
+            </a>
+            <a class="genre-item">
+              <input type="checkbox" id="fantasyGenre">
+              <label for="fantasyGenre">Fantasy</label>
+            </a>
+            <a class="genre-item">
+              <input type="checkbox" id="romanceGenre">
+              <label for="romanceGenre">Romance</label>
+            </a>
+            <a class="genre-item">
+              <input type="checkbox" id="gameGenre">
+              <label for="gameGenre">Game</label>
+            </a>
+            <a class="genre-item">
+              <input type="checkbox" id="urbanGenre">
+              <label for="urbanGenre">Urban</label>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="bookContainer"></div>
+
+  <script>
+    // Function to toggle genre container expansion
+    function toggleGenreContainer() {
+      const genreContainer = document.getElementById('genreContainer');
+      genreContainer.classList.toggle('expanded');
+    }
+
+  </script>
+  <!------------------------footer--------------------------------------->
+
+  <section class="footer">
+
+    <div class="footer-container">
+
+      <div class="row">
+
+        <ul class="footer-links">
+          <li>
+            <a href="/html/alltags.html"></i>All Tags</a>
+          </li>
+          <li>
+            <a href="/html/profile.html"></i>Profile Info</a>
+          </li>
+          <li>
+            <a href="/html/t&c.html"></i>Terms and Condition</a>
+          </li>
+          <li style="border-right: none">
+            <a href="/html/contactus.html"></i>Contact Us</a>
+          </li>
+        </ul>
+        <div class="credit"> <span> Bookish </span>copyright ©2023 all rights reserved! </div>
+
+      </div>
+    </div>
+  </section>
+  <script type="module" src="/js/genres.js"></script>
+</body>
+
+</html>

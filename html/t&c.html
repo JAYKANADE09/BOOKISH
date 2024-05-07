@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 50px;
+            text-align: justify;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .container h1 {
+            text-align: center;
+            font-size: 25px;
+        }
+
+        .container p {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-------------header starts------------------->
+    <header id="header" class="header">
+        <div class="header-1">
+            <a href="/index.html" class="logo"><img src="/assets/bk-logo.png"></a>
+            <div class="icons">
+                <div id="user-login-btn" class="user-login-btn" onclick="toggleIcon()">
+                    <i class='bx bxs-user-circle'></i>
+                </div>
+                <div id="subMenu" class="sub-menu-wrap">
+                    <div class="sub-icon" id="sub-icon">
+                        <div class="user-info" id="user-info">
+                            <img id="user-image" src="/assets/person-circle.svg" alt="">
+                            <span id="user-name">User</span>
+                        </div>
+                        <hr>
+                        <a href="/html/profile.html" class="sub-icon-link" id="profile-link">
+                            <i class='bx bxs-user-circle'></i>
+                            <p>Profile</p>
+                        </a>
+                        <a href="/html/usersettings.html" class="sub-icon-link" id="settings-link">
+                            <i class='bx bxs-cog'></i>
+                            <p>Settings</p>
+                        </a>
+                        <a href="/html/contactus.html" class="sub-icon-link" id="helps-services-link">
+                            <i class="bi bi-question-circle-fill"></i>
+                            <p>Helps & Services</p>
+                        </a>
+                        <a href="/html/Login.html" class="sub-icon-link" id="logout-link" onclick="logout()">
+                            <i class='bx bx-log-out'></i>
+                            <p id="logout-text">Logout</p>
+                        </a>
+                        <a href="/html/Login.html" class="sub-icon-link" id="login-link">
+                            <i class='bx bx-log-in'></i>
+                            <p>Login</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <script src="/js/navbar.js" type="module"></script>
+        </div>
+        <div class="header-2">
+            <nav id="navbar" class="navbar">
+                <input class="menu-btn" type="checkbox" id="menu-btn" />
+                <label class="menu-icon" for="menu-btn">
+                    <span class="nav-icon"></span>
+                </label>
+                <div class="menu"></div>
+                <script type="module">
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const menu = document.querySelector('.menu');
+
+                        const menuItems = [
+                            { text: 'Home', href: '/index.html', onclick: 'showMenu(0)' },
+                            { text: 'Genres', href: '/html/genres.html', onclick: 'showMenu(1)' },
+                            { text: 'Library', href: '/html/library.html', onclick: 'showMenu(3)' },
+                            { text: 'User Settings', href: '/html/usersettings.html', onclick: 'showMenu(4)' },
+                            { text: 'About Us', href: '/html/aboutus.html', onclick: 'showMenu(5)' }
+                        ];
+
+                        menuItems.forEach(item => {
+                            const link = document.createElement('a');
+                            link.textContent = item.text;
+                            link.href = item.href;
+                            link.setAttribute('onclick', item.onclick);
+                            link.classList.add('nav-link');
+                            menu.appendChild(link);
+                        });
+                    });
+                </script>
+            </nav>
+        </div>
+        <script>
+            let subIcon = document.getElementById("subMenu");
+            function toggleIcon() {
+                subIcon.classList.toggle("open-icon");
+            }
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const menuLinks = document.querySelectorAll(".menu a");
+
+                menuLinks.forEach(function (link, index) {
+                    link.addEventListener("click", function () {
+                        // Remove 'active' class from all links
+                        menuLinks.forEach(function (menuLink) {
+                            menuLink.classList.remove("active");
+                        });
+                        // Add 'active' class to the clicked link
+                        link.classList.add("active")
+
+                        // Show the selected link
+                        showMenu(index);
+                    });
+                });
+            });
+        </script>
+    </header>
+    <!---------------------Header close---------------------->
+    <div class="container">
+        <h1>Terms and Conditions</h1>
+        <p>By accessing or using Bookish!!!, you agree to be bound by these Terms and Conditions, as well as all
+            applicable laws and regulations. Bookish!!! grants you a limited, non-exclusive, and non-transferable
+            license to access and use the platform for personal and commercial purposes only. All content available on
+            the platform, including text, graphics, logos, images, and software, is the property of Bookish!!! or its
+            licensors and is protected by copyright and other intellectual property laws. You agree not to modify,
+            reproduce, distribute, or create derivative works based on our content without prior written consent.</p>
+        <p>In order to access certain features of the platform, you may be required to create a user account. You are
+            responsible for maintaining the confidentiality of your account information and for all activities that
+            occur under your account. Bookish!!! reserves the right to suspend or terminate your account at any time for
+            any reason. Your use of the platform is also governed by our Privacy Policy, which outlines how we collect,
+            use, and disclose your personal information. By using Bookish!!!, you consent to the terms of our Privacy
+            Policy.</p>
+        <p>By submitting content to the platform, including stories, reviews, and comments, you grant Bookish!!! a
+            worldwide, non-exclusive license to use, reproduce, modify, adapt, publish, translate, distribute, and
+            display such content in any medium. Our platform may contain links to third-party websites or services that
+            are not owned or controlled by Bookish!!!. We are not responsible for the content, privacy policies, or
+            practices of any third-party websites or services.</p>
+        <p>Bookish!!! provides the platform on an "as is" and "as available" basis, without any warranties of any kind,
+            either express or implied. We do not warrant that the platform will be uninterrupted or error-free, or that
+            any defects will be corrected. In no event shall Bookish!!! or its affiliates be liable for any indirect,
+            incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data,
+            or goodwill, arising out of or in connection with your use of the platform.</p>
+        <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of [Your
+            Jurisdiction], without regard to its conflict of law provisions. Any dispute arising out of or relating to
+            these terms shall be subject to the exclusive jurisdiction of the courts in [Your Jurisdiction].</p>
+        <p>By using Bookish!!!, you acknowledge that you have read, understood, and agree to be bound by these Terms and
+            Conditions.</p>
+    </div>
+    <section class="footer">
+
+        <div class="footer-container">
+
+            <div class="row">
+
+                <ul class="footer-links">
+                    <li>
+                        <a href="/html/alltags.html"></i>All Tags</a>
+                    </li>
+                    <li>
+                        <a href="/html/profile.html"></i>Profile Info</a>
+                    </li>
+                    <li>
+                        <a href="/html/t&c.html"></i>Terms and Condition</a>
+                    </li>
+                    <li style="border-right: none">
+                        <a href="/html/contactus.html"></i>Contact Us</a>
+                    </li>
+                </ul>
+                <div class="credit"> <span> Bookish </span>copyright ©2023 all rights reserved! </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This ">
+    <meta name="author" content="Code With Mark">
+    <meta name="authorUrl" content="http://codewithmark.com">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #000000;
+        }
+
+        .invoice-box {
+            max-width: 800px;
+            height: auto;
+            margin-top: 5%;
+            margin-left: 25%;
+            margin-bottom: 5%;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.15);
+        }
+
+        .invoice-box img {
+            height: 40px;
+        }
+
+        .invoice-box #receipt-text {
+            font-size: 40px;
+            font-weight: 900;
+            color: #000000;
+            text-align: center;
+        }
+
+        .invoice-box #subscribe-text {
+            font-size: 30px;
+            font-weight: 300;
+            color: #3c3c3c;
+            text-align: center;
+        }
+
+        .invoice-box #receipt-thanks {
+            font-size: 20px;
+            font-weight: 300;
+            margin-top: 20px;
+            color: #3c3c3c;
+        }
+
+        .invoice-box #summary {
+            width: 90%;
+            margin: 10px 0;
+            font-size: 20px;
+            margin-top: 20px;
+            color: #3c3c3c;
+        }
+
+        #summary h3{
+            font-weight: 700;
+        }
+
+        .invoice-box #finalreceipt {
+            font-size: 15px;
+            font-weight: 300;
+            color: #000000;
+            text-align: center;
+        }
+
+        .invoice-box strong {
+            font-weight: bold;
+        }
+
+        .invoice-box span {
+            float: right;
+            margin-right: 10px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn_print {
+            background-color: #5bc0de;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn_print:hover {
+            background-color: #31b0d5;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('click', '.btn_print', function (event) {
+                event.preventDefault();
+                var element = document.getElementById('container_content');
+                var opt = {
+                    margin: 1,
+                    filename: 'pageContent.pdf',
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                html2pdf().set(opt).from(element).save();
+            });
+            // Extract URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const cardholder = urlParams.get('cardholder');
+            const dataPrice = parseFloat(urlParams.get('dataPrice'));
+            const cardNumber = urlParams.get('cardNumber');
+
+            // Set username, data price, card number, and plan
+            document.getElementById('username').textContent = cardholder;
+            document.getElementById('dataPrice').textContent = dataPrice.toFixed(2);
+            document.getElementById('cardNumber').textContent = cardNumber.slice(-4);
+
+            // Calculate plan based on data price
+            const plan = dataPrice < 100 ? 'Monthly' : 'Annual';
+            document.getElementById('plan').textContent = plan;
+
+            // Generate and display a random transaction ID
+            const transactionId = generateTransactionId();
+            document.getElementById('transactionId').textContent = transactionId;
+        });
+
+        // Function to generate random transaction ID
+        function generateTransactionId() {
+            return Math.random().toString(36).substr(2, 9);
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div class="text-center" style="padding:20px;">
+        <input type="button" id="rep" value="Print" class="btn btn-info btn_print">
+    </div>
+
+    <div class="container_content" id="container_content">
+        <div class="invoice-box">
+            <div>
+                <img src="/assets/book-logo.jpeg">
+            </div><br>
+            <p id="receipt-text">Receipt</p>
+            <p id="subscribe-text">Bookish Subscription</p>
+            <div id="receipt-thanks">
+                <p>Thank you for subscribing to Bookish.</p>
+                <p>Below is your receipt for your subscription.</p>
+            </div>
+            <div id="summary">
+                <h3>Summary:</h3>
+                <p><strong>Transaction ID:</strong> <span id="transactionId"></span></p>
+                <p><strong>Username:</strong> <span id="username"></span></p>
+                <p><strong>Plan:</strong> <span id="plan"></span></p>
+                <p><strong>Price:</strong><span id="dataPrice"></span></p>
+                <p><strong>Card Number Ends With:</strong><span id="cardNumber"></span></p>
+            </div>
+            <p id="finalreceipt">This receipt was generated by Bookish.</p>
+        </div>
+    </div>
+
+</body>
+
+</html>

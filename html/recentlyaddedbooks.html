@@ -1,0 +1,150 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Recently Added Books</title>
+        <style>
+            /* CSS styles for the book display */
+            .recently-added-title {
+                margin-top: 40px;
+                margin-left: 20px;
+                display: inline-block;
+                align-items: flex-start;
+                text-decoration: none;
+                color: var(--black);
+            }
+
+            .recently-added-title h1 {
+                font-weight: 700;
+                font-size: 30px;
+            }
+
+            .pagination {
+                margin: -40px 300px;
+                padding: 0px 100px;
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+
+            .pagination a {
+                font-weight: 700;
+                color: #444;
+                margin-right: 1px;
+                padding: 12px 30px;
+                font-size: 22px;
+            }
+
+            .pagination a:hover {
+                border-radius: 5px;
+                border: none;
+                cursor: pointer;
+                background-color: #27ae60;
+                color: white;
+            }
+
+            .pagination .active {
+                background-color: #27ae60;
+                border-radius: 5px;
+            }
+
+            .books-container-recent-added {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 10px;
+                margin: 40px;
+            }
+
+            .book {
+                display: block;
+                margin-bottom: 0px;
+            }
+
+            .book-image {
+                width: 230px;
+                height: 306px;
+                margin: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                transition: transform 0.2s ease-in-out;
+                cursor: pointer;
+            }
+
+            .book-image img {
+                width: 230px;
+                height: 306px;
+                border-radius: 5px;
+            }
+
+            .book-image:hover {
+                transform: scale(1.1);
+            }
+
+            .book-title {
+                max-width: 230px;
+                height: 100px;
+                font-size: 20px;
+                position: relative;
+                text-align: center;
+                overflow: hidden;
+                text-decoration: none;
+                color: var(--black);
+            }
+
+            .book-link {
+            text-decoration: none;
+            color: var(--black);
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="recently-added-title">
+            <h1>Recently Added Novels</h1>
+
+            <div class="pagination">
+                <a id="genre-all" class="active" onclick="showGenre(0)">All</a>
+                <a id="genre-action" data-genre="1">Action</a>
+                <a id="genre-adventure" data-genre="2">Adventure</a>
+                <a id="genre-fantasy" data-genre="3">Fantasy</a>
+                <a id="genre-romance" data-genre="4">Romance</a>
+                <a id="genre-game" data-genre="5">Game</a>
+                <a id="genre-urban" data-genre="6">Urban</a>
+            </div>
+        </div>
+        <br><br>
+        <div id="books-container" class="books-container-recent-added"></div>
+
+        <script src="/js/test.js" type="module"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const paginationLinks = document.querySelectorAll(".pagination a");
+        
+                paginationLinks.forEach(function (link) {
+                    link.addEventListener("click", function () {
+                        // Remove 'active' class from all links
+                        paginationLinks.forEach(function (paginationLink) {
+                            paginationLink.classList.remove("active");
+                        });
+        
+                        // Add 'active' class to the clicked link
+                        link.classList.add("active");
+        
+                        // Show the selected genre
+                        showGenre(link.dataset.genre);
+                    });
+                });
+        
+                // Trigger click event on the "All" link to display it by default
+                const genreAllLink = document.getElementById("genre-all");
+                genreAllLink.click();
+            });
+        </script>
+        
+    </body>
+
+    </html>
